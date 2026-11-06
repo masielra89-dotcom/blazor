@@ -1,0 +1,68 @@
+﻿@page "/catalogo"
+@rendermode InteractiveServer
+@using sharpness_sharp.Components.UIComponents
+
+<button @onclick="AgregarCafe" class="ui-btn ui-btn-primary">Agregar café</button>
+
+<div class="grid grid-cols-4 gap-4 p-4">
+    @foreach (Cafe cafe in lstCafes)
+    {
+        <CoffeeCard Imagen="@cafe.Imagen"
+                    NombreCafe="@cafe.NombreCafe"
+                    DescripcionCafe="@cafe.DescripcionCafe"
+                    PrecioCafe="@cafe.PrecioCafe" />
+    }
+</div>
+
+@code {
+    private const string ImgA = "https://cuplacoffee.com/wp-content/uploads/2025/03/what-is-an-americano-featured.jpg";
+    private const string ImgB = "https://perfectdailygrind.com/wp-content/uploads/2019/11/cappuccino-2.png";
+
+    private int contador = 1;
+
+    private void AgregarCafe()
+    {
+        lstCafes.Add(new Cafe(ImgA, "Café nuevo " + contador, "Café agregado con el botón.", 20m));
+        contador++;
+    }
+
+    private List<Cafe> lstCafes = new()
+    {
+        new Cafe(ImgA, "Americano", "Espresso diluido con agua caliente.", 20m),
+        new Cafe(ImgB, "Latte", "Espresso con leche vaporizada y una fina capa de espuma.", 25m),
+        new Cafe(ImgB, "Cappuccino", "Espresso con leche vaporizada y abundante espuma.", 25m),
+        new Cafe(ImgA, "Espresso", "Café corto y concentrado, con aroma intenso.", 15m),
+        new Cafe(ImgA, "Doppio", "Doble dosis de espresso para un sabor intenso.", 22m),
+        new Cafe(ImgA, "Ristretto", "Espresso preparado con menos agua.", 18m),
+        new Cafe(ImgA, "Lungo", "Espresso con una extracción más larga.", 18m),
+        new Cafe(ImgB, "Espresso Macchiato", "Espresso con un pequeño toque de espuma de leche.", 20m),
+        new Cafe(ImgB, "Cortado", "Espresso con una pequeña cantidad de leche caliente.", 20m),
+        new Cafe(ImgB, "Flat White", "Espresso doble con leche vaporizada de textura sedosa.", 27m),
+        new Cafe(ImgB, "Mocaccino", "Espresso con chocolate y leche vaporizada.", 28m),
+        new Cafe(ImgA, "Café Bombón", "Espresso servido sobre leche condensada.", 24m),
+        new Cafe(ImgA, "Affogato", "Helado de vainilla bañado con espresso caliente.", 30m),
+        new Cafe(ImgA, "Cold Brew", "Café extraído lentamente en agua fría.", 26m),
+        new Cafe(ImgB, "Iced Latte", "Espresso con leche fría y cubos de hielo.", 27m),
+        new Cafe(ImgB, "Frappé de Café", "Café licuado con leche y hielo.", 30m),
+        new Cafe(ImgB, "Latte de Vainilla", "Espresso con leche vaporizada y vainilla.", 28m),
+        new Cafe(ImgB, "Latte de Caramelo", "Espresso con leche y jarabe de caramelo.", 28m),
+        new Cafe(ImgB, "Moca Blanco", "Espresso con chocolate blanco y leche vaporizada.", 30m),
+        new Cafe(ImgA, "Espresso Tonic", "Espresso servido con agua tónica y hielo.", 28m)
+    };
+
+    public class Cafe
+    {
+        public string? Imagen { get; set; }
+        public string? NombreCafe { get; set; }
+        public string? DescripcionCafe { get; set; }
+        public decimal PrecioCafe { get; set; }
+
+        public Cafe(string imagen, string nombreCafe, string descripcionCafe, decimal precioCafe)
+        {
+            Imagen = imagen;
+            NombreCafe = nombreCafe;
+            DescripcionCafe = descripcionCafe;
+            PrecioCafe = precioCafe;
+        }
+    }
+}
